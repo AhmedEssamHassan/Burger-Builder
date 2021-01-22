@@ -1,20 +1,27 @@
 import React, { Component } from "react";
-import Aux from "../../hoc/Aux";
-import SideDrower from "../Navigation/SideDrower/SideDrower";
-import Toolbar from "../Navigation/Toolbar/Toolbar";
+import Aux from "../AUX/Aux";
+import SideDrower from "../../Components/Navigation/SideDrower/SideDrower";
+import Toolbar from "../../Components/Navigation/Toolbar/Toolbar";
 import classes from "./Layout.module.css";
 class Layout extends Component {
   state = {
-    showSideDrower: true,
+    showSideDrower: false,
   };
   sideDrowerClosedHandler = () => {
     this.setState({ showSideDrower: false });
   };
 
+  sideDrowerToggleHandler = () => {
+    this.setState((prevState) => {
+      return { showSideDrower: !prevState.showSideDrower };
+    });
+    console.log("clicked");
+  };
+
   render() {
     return (
       <Aux>
-        <Toolbar />
+        <Toolbar drowerToggleClicked={this.sideDrowerToggleHandler} />
         <SideDrower
           open={this.state.showSideDrower}
           closed={this.sideDrowerClosedHandler}
